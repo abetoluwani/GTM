@@ -20,20 +20,24 @@ class ViewerControls extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SleekIconButton(
-            onPressed: controller.previousGlasses,
-            icon: Icons.chevron_left_rounded,
-          ),
-          const SizedBox(width: 24),
+          if (!isTryOnMode) ...[
+            SleekIconButton(
+              onPressed: controller.previousGlasses,
+              icon: Icons.chevron_left_rounded,
+            ),
+            const SizedBox(width: 24),
+          ],
           SleekMainButton(
             onPressed: controller.toggleTryOn,
             text: isTryOnMode ? 'View 3D' : 'Try On',
           ),
-          const SizedBox(width: 24),
-          SleekIconButton(
-            onPressed: controller.nextGlasses,
-            icon: Icons.chevron_right_rounded,
-          ),
+          if (!isTryOnMode) ...[
+            const SizedBox(width: 24),
+            SleekIconButton(
+              onPressed: controller.nextGlasses,
+              icon: Icons.chevron_right_rounded,
+            ),
+          ],
         ],
       ),
     );
