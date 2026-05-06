@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/glasses_model.dart';
 
-const _sunglassesUrl =
-    'https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Assets@main/Models/SunglassesKhronos/glTF-Binary/SunglassesKhronos.glb';
+const _sunglassesUrl = 'assets/models/sunglasses.glb';
 
 /// JavaScript template to target specific parts of the glasses (Frames vs Lenses)
 String _colorScript({
@@ -13,7 +12,7 @@ String _colorScript({
   final fr = frame.r;
   final fg = frame.g;
   final fb = frame.b;
-  
+
   final lr = lens.r;
   final lg = lens.g;
   final lb = lens.b;
@@ -60,9 +59,9 @@ class GlassesController extends ChangeNotifier {
       frameColor: const Color(0xFF00E5FF),
       lensColor: const Color(0xFF006064),
       modelUrl: _sunglassesUrl,
-      environmentUrl: 'https://modelviewer.dev/shared-assets/environments/spruit_sunrise_1k_hdr.hdr',
+      environmentUrl: 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/2294472375_bcf367e772_o.jpg', // Nature
       materialJs: _colorScript(
-        frame: const Color(0xFF00E5FF), 
+        frame: const Color(0xFF00E5FF),
         lens: const Color(0xFF006064),
         opacity: 0.8,
       ),
@@ -72,9 +71,9 @@ class GlassesController extends ChangeNotifier {
       frameColor: const Color(0xFFFF4081),
       lensColor: const Color(0xFFF8BBD0),
       modelUrl: _sunglassesUrl,
-      environmentUrl: 'https://modelviewer.dev/shared-assets/environments/aircraft_workshop_01_1k.hdr',
+      environmentUrl: 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/equirectangular.png', // Studio
       materialJs: _colorScript(
-        frame: const Color(0xFFFF4081), 
+        frame: const Color(0xFFFF4081),
         lens: const Color(0xFFF8BBD0),
         opacity: 0.5,
       ),
@@ -84,9 +83,9 @@ class GlassesController extends ChangeNotifier {
       frameColor: const Color(0xFF7C4DFF),
       lensColor: const Color(0xFFFFFF00),
       modelUrl: _sunglassesUrl,
-      environmentUrl: 'https://modelviewer.dev/shared-assets/environments/lightroom_14b.hdr',
+      environmentUrl: 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/2294472375_bcf367e772_o.jpg', // Nature
       materialJs: _colorScript(
-        frame: const Color(0xFF7C4DFF), 
+        frame: const Color(0xFF7C4DFF),
         lens: const Color(0xFFFFFF00),
         opacity: 0.6,
       ),
@@ -96,9 +95,9 @@ class GlassesController extends ChangeNotifier {
       frameColor: const Color(0xFF37474F),
       lensColor: const Color(0xFF000000),
       modelUrl: _sunglassesUrl,
-      environmentUrl: 'https://modelviewer.dev/shared-assets/environments/moon_1k.hdr',
+      environmentUrl: 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/equirectangular.png', // Room/Studio
       materialJs: _colorScript(
-        frame: const Color(0xFF37474F), 
+        frame: const Color(0xFF37474F),
         lens: const Color(0xFF000000),
         opacity: 0.95,
       ),

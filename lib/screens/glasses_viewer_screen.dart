@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/glasses_controller.dart';
-import 'components/viewer_background.dart';
+import '../widgets/ar_background_view.dart';
 import 'components/active_model_viewer.dart';
 import 'components/model_metadata.dart';
 import 'components/viewer_controls.dart';
@@ -17,24 +17,20 @@ class GlassesViewerScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          ViewerBackground(isTryOnMode: controller.isTryOnMode),
-
-          // Main Interactive Layer
-          const SafeArea(
+          if (controller.isTryOnMode)
+            Positioned.fill(child: const ARBackgroundView()),
+            
+          SafeArea(
             child: Column(
               children: [
-                SizedBox(height: 16),
-
-                // 3D Model Viewer — single active model
+                const SizedBox(height: 16),
                 Expanded(
-                  child: ActiveModelViewer(),
+                  child: controller.isTryOnMode
+                      ? const SizedBox.shrink()
+                      : const ActiveModelViewer(),
                 ),
-
-                // Dynamic Metadata Layer
-                ModelMetadata(),
-
-                // Control Interface
-                ViewerControls(),
+                if (!controller.isTryOnMode) const ModelMetadata(),
+                const ViewerControls(),
               ],
             ),
           ),

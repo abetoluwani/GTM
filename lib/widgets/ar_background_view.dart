@@ -13,21 +13,18 @@ class ARBackgroundView extends StatelessWidget {
 
     return Stack(
       children: [
-        // 1. The 360 World
-        if (model.environmentUrl != null)
-          ModelViewer(
-            key: ValueKey('world_${model.environmentUrl}'),
-            src:
-                'https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Assets@main/Models/EnvironmentTest/glTF-Binary/EnvironmentTest.glb', // Keep a light model to hold the skybox
-            skyboxImage: model.environmentUrl,
-            environmentImage: model.environmentUrl,
-            backgroundColor: Colors.black,
-            autoRotate: false,
-            cameraControls: true,
-            disableZoom: false,
-            interactionPrompt: InteractionPrompt.none,
-            exposure: 1.0,
-          ),
+        ModelViewer(
+          key: ValueKey('world_${model.environmentUrl}'),
+          src: model.modelUrl!,
+          skyboxImage: model.environmentUrl,
+          environmentImage: model.environmentUrl,
+          backgroundColor: Colors.transparent,
+          autoRotate: true,
+          cameraControls: true,
+          disableZoom: false,
+          interactionPrompt: InteractionPrompt.none,
+          exposure: 3.0, // High exposure for POV mode
+        ),
 
         // 2. The Lens Tint Overlay
         // This simulates looking through the colored glass
