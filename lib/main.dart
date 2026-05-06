@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'controllers/glasses_controller.dart';
 import 'screens/glasses_viewer_screen.dart';
 
 void main() {
-  runApp(const GlassesApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => GlassesController(),
+      child: const GlassesApp(),
+    ),
+  );
 }
 
 class GlassesApp extends StatelessWidget {
