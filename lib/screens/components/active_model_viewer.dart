@@ -13,15 +13,15 @@ class ActiveModelViewer extends StatelessWidget {
     final isTryOnMode = controller.isTryOnMode;
     final isTransitioning = controller.isTransitioning;
 
+     final double targetOpacity = (isTransitioning || isTryOnMode) ? 0.0 : 1.0;
+
     return AnimatedOpacity(
-      opacity: isTransitioning ? 0.0 : 1.0,
-      duration: const Duration(milliseconds: 200),
+      opacity: targetOpacity,
+      duration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
       child: Center(
         child: ModelViewer(
-          // We use a key that includes the index so the script re-runs,
-          // but the src remains the same so the browser cache makes it instant.
-          key: ValueKey('viewer_${controller.currentIndex}'),
+           key: ValueKey('viewer_${model.name}_${model.frameColor.value}'),
           backgroundColor: Colors.transparent,
           src: model.modelUrl!,
           alt: model.name,
@@ -30,7 +30,7 @@ class ActiveModelViewer extends StatelessWidget {
           cameraControls: true,
           disableZoom: true,
           loading: Loading.eager,
-          touchAction: TouchAction.none, // Full rotation control
+          touchAction: TouchAction.none,
           interactionPrompt: InteractionPrompt.none,
           relatedJs: model.materialJs,
           relatedCss: '''

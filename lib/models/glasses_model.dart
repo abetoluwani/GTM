@@ -5,9 +5,7 @@ class GlassesModel {
   final Color frameColor;
   final Color lensColor;
   final String? modelUrl;
-
-  /// JavaScript to inject into model-viewer after the model loads.
-  /// Used to modify PBR material colors per variant.
+  final String? environmentUrl;  
   final String? materialJs;
 
   GlassesModel({
@@ -15,6 +13,7 @@ class GlassesModel {
     required this.frameColor,
     required this.lensColor,
     this.modelUrl,
+    this.environmentUrl,
     this.materialJs,
   });
 }

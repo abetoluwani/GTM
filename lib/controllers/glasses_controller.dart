@@ -4,33 +4,51 @@ import '../models/glasses_model.dart';
 const _sunglassesUrl =
     'https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Assets@main/Models/SunglassesKhronos/glTF-Binary/SunglassesKhronos.glb';
 
+/// JavaScript template to target specific parts of the glasses (Frames vs Lenses)
 String _colorScript({
-  required double fr,
-  required double fg,
-  required double fb,
+  required Color frame,
+  required Color lens,
+  double opacity = 0.7,
 }) {
+  final fr = frame.r;
+  final fg = frame.g;
+  final fb = frame.b;
+  
+  final lr = lens.r;
+  final lg = lens.g;
+  final lb = lens.b;
+
   return '''
     (function() {
       const mv = document.querySelector('model-viewer');
-      const applyColor = () => {
-        if (!mv.model) return;
-        const mats = mv.model.materials;
-        for (const mat of mats) {
+      const applyStyle = () => {
+        if (!mv.model || !mv.model.materials) return;
+        
+        console.log('Applying colors to materials...');
+        mv.model.materials.forEach((mat) => {
           const pbr = mat.pbrMetallicRoughness;
-          const cur = pbr.baseColorFactor;
-          pbr.setBaseColorFactor([$fr, $fg, $fb, cur[3]]);
+          const currentBase = pbr.baseColorFactor;
           
-          // Make it look more premium/matte
-          pbr.setRoughnessFactor(0.4);
-          pbr.setMetallicFactor(0.2);
-        }
+          // LENS DETECTION: If the part is already semi-transparent, treat it as a lens
+          if (currentBase[3] < 0.9 || mat.name.toLowerCase().includes('lens')) {
+            pbr.setBaseColorFactor([$lr, $lg, $lb, $opacity]);
+            pbr.setRoughnessFactor(0.1);
+            pbr.setMetallicFactor(0.1);
+          } 
+          // FRAME DETECTION: Everything else is a frame
+          else {
+            pbr.setBaseColorFactor([$fr, $fg, $fb, 1.0]);
+            pbr.setRoughnessFactor(0.3);
+            pbr.setMetallicFactor(0.7);
+          }
+        });
       };
       
-      // Apply immediately if already loaded, otherwise wait for load
-      if (mv.model) {
-        applyColor();
-      }
-      mv.addEventListener('load', applyColor);
+      if (mv.model) applyStyle();
+      mv.addEventListener('load', applyStyle);
+      // Extra check for stability
+      setTimeout(applyStyle, 100);
+      setTimeout(applyStyle, 500);
     })();
   ''';
 }
@@ -39,31 +57,51 @@ class GlassesController extends ChangeNotifier {
   final List<GlassesModel> _glassesList = [
     GlassesModel(
       name: 'Impressionist',
-      frameColor: const Color(0xFF4A90E2),
-      lensColor: const Color(0xFF2C5F8D),
+      frameColor: const Color(0xFF00E5FF),
+      lensColor: const Color(0xFF006064),
       modelUrl: _sunglassesUrl,
-      materialJs: _colorScript(fr: 0.29, fg: 0.56, fb: 0.89),
+      environmentUrl: 'https://modelviewer.dev/shared-assets/environments/spruit_sunrise_1k_hdr.hdr',
+      materialJs: _colorScript(
+        frame: const Color(0xFF00E5FF), 
+        lens: const Color(0xFF006064),
+        opacity: 0.8,
+      ),
     ),
     GlassesModel(
       name: 'Sunset',
-      frameColor: const Color(0xFFE67E22),
-      lensColor: const Color(0xFF8B4513),
+      frameColor: const Color(0xFFFF4081),
+      lensColor: const Color(0xFFF8BBD0),
       modelUrl: _sunglassesUrl,
-      materialJs: _colorScript(fr: 0.90, fg: 0.49, fb: 0.13),
+      environmentUrl: 'https://modelviewer.dev/shared-assets/environments/aircraft_workshop_01_1k.hdr',
+      materialJs: _colorScript(
+        frame: const Color(0xFFFF4081), 
+        lens: const Color(0xFFF8BBD0),
+        opacity: 0.5,
+      ),
     ),
     GlassesModel(
       name: 'Ocean',
-      frameColor: const Color(0xFF2D8659),
-      lensColor: const Color(0xFF1A4D2E),
+      frameColor: const Color(0xFF7C4DFF),
+      lensColor: const Color(0xFFFFFF00),
       modelUrl: _sunglassesUrl,
-      materialJs: _colorScript(fr: 0.18, fg: 0.53, fb: 0.35),
+      environmentUrl: 'https://modelviewer.dev/shared-assets/environments/lightroom_14b.hdr',
+      materialJs: _colorScript(
+        frame: const Color(0xFF7C4DFF), 
+        lens: const Color(0xFFFFFF00),
+        opacity: 0.6,
+      ),
     ),
     GlassesModel(
       name: 'Midnight',
-      frameColor: const Color(0xFF8B9BA8),
-      lensColor: const Color(0xFF2C3E50),
+      frameColor: const Color(0xFF37474F),
+      lensColor: const Color(0xFF000000),
       modelUrl: _sunglassesUrl,
-      materialJs: _colorScript(fr: 0.55, fg: 0.61, fb: 0.66),
+      environmentUrl: 'https://modelviewer.dev/shared-assets/environments/moon_1k.hdr',
+      materialJs: _colorScript(
+        frame: const Color(0xFF37474F), 
+        lens: const Color(0xFF000000),
+        opacity: 0.95,
+      ),
     ),
   ];
 

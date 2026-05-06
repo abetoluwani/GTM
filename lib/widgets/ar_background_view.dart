@@ -10,24 +10,24 @@ class ARBackgroundView extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = context.watch<GlassesController>();
     final model = controller.currentModel;
-    
-    // The "World" environment model (City/Street)
-    const worldUrl = 'https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Assets@main/Models/EnvironmentTest/glTF-Binary/EnvironmentTest.glb';
 
     return Stack(
       children: [
-        // 1. The 3D World
-        ModelViewer(
-          key: const ValueKey('world_viewer'),
-          src: worldUrl,
-          backgroundColor: Colors.black,
-          autoRotate: false,
-          cameraControls: true,
-          disableZoom: false,
-          interactionPrompt: InteractionPrompt.none,
-          // Low exposure to make the lens tint pop
-          exposure: 0.8,
-        ),
+        // 1. The 360 World
+        if (model.environmentUrl != null)
+          ModelViewer(
+            key: ValueKey('world_${model.environmentUrl}'),
+            src:
+                'https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Assets@main/Models/EnvironmentTest/glTF-Binary/EnvironmentTest.glb', // Keep a light model to hold the skybox
+            skyboxImage: model.environmentUrl,
+            environmentImage: model.environmentUrl,
+            backgroundColor: Colors.black,
+            autoRotate: false,
+            cameraControls: true,
+            disableZoom: false,
+            interactionPrompt: InteractionPrompt.none,
+            exposure: 1.0,
+          ),
 
         // 2. The Lens Tint Overlay
         // This simulates looking through the colored glass
@@ -47,7 +47,7 @@ class ARBackgroundView extends StatelessWidget {
             ),
           ),
         ),
-        
+
         // 3. Optional: A subtle "frame" blur at the edges
         IgnorePointer(
           child: Container(
