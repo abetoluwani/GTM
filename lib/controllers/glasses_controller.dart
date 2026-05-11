@@ -58,7 +58,7 @@ class GlassesController extends ChangeNotifier {
       name: 'Impressionist',
       frameColor: const Color(0xFF00E5FF),
       lensColor: const Color(0xFF006064),
-      environmentImage: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=80',
+      environmentImage: 'assets/environments/kloofendal_puresky.jpg',
       modelUrl: _sunglassesUrl,
       materialJs: _colorScript(
         frame: const Color(0xFF00E5FF),
@@ -70,7 +70,7 @@ class GlassesController extends ChangeNotifier {
       name: 'Sunset',
       frameColor: const Color(0xFFFF4081),
       lensColor: const Color(0xFFF8BBD0),
-      environmentImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80',
+      environmentImage: 'assets/environments/sunset_quarry.jpg',
       modelUrl: _sunglassesUrl,
       materialJs: _colorScript(
         frame: const Color(0xFFFF4081),
@@ -82,7 +82,7 @@ class GlassesController extends ChangeNotifier {
       name: 'Ocean',
       frameColor: const Color(0xFF7C4DFF),
       lensColor: const Color(0xFFFFFF00),
-      environmentImage: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1920&q=80',
+      environmentImage: 'assets/environments/modern_bathroom.jpg',
       modelUrl: _sunglassesUrl,
       materialJs: _colorScript(
         frame: const Color(0xFF7C4DFF),
@@ -94,7 +94,7 @@ class GlassesController extends ChangeNotifier {
       name: 'Midnight',
       frameColor: const Color(0xFF37474F),
       lensColor: const Color(0xFF000000),
-      environmentImage: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&q=80',
+      environmentImage: 'assets/environments/shanghai_bund.jpg',
       modelUrl: _sunglassesUrl,
       materialJs: _colorScript(
         frame: const Color(0xFF37474F),
