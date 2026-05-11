@@ -21,7 +21,7 @@ class ActiveModelViewer extends StatelessWidget {
       curve: Curves.easeOut,
       child: Center(
         child: ModelViewer(
-           key: ValueKey('viewer_${model.name}_${model.frameColor.value}'),
+           key: ValueKey('viewer_${model.name}'),
           backgroundColor: Colors.transparent,
           src: model.modelUrl!,
           alt: model.name,

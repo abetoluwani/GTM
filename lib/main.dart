@@ -4,6 +4,7 @@ import 'controllers/glasses_controller.dart';
 import 'screens/glasses_viewer_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     ChangeNotifierProvider(
       create: (_) => GlassesController(),
