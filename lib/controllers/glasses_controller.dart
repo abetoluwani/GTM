@@ -58,7 +58,7 @@ class GlassesController extends ChangeNotifier {
       name: 'Impressionist',
       frameColor: const Color(0xFF00E5FF),
       lensColor: const Color(0xFF006064),
-      environmentImage: 'assets/environments/kloofendal_puresky.jpg',
+      environmentImage: 'assets/environments/chinese_garden.jpg',
       modelUrl: _sunglassesUrl,
       materialJs: _colorScript(
         frame: const Color(0xFF00E5FF),
@@ -100,6 +100,30 @@ class GlassesController extends ChangeNotifier {
         frame: const Color(0xFF37474F),
         lens: const Color(0xFF000000),
         opacity: 0.95,
+      ),
+    ),
+    GlassesModel(
+      name: 'Vintage',
+      frameColor: const Color(0xFFFFAB40),
+      lensColor: const Color(0xFF3E2723),
+      environmentImage: 'assets/environments/autumn_park.jpg',
+      modelUrl: _sunglassesUrl,
+      materialJs: _colorScript(
+        frame: const Color(0xFFFFAB40),
+        lens: const Color(0xFF3E2723),
+        opacity: 0.75,
+      ),
+    ),
+    GlassesModel(
+      name: 'Cyber',
+      frameColor: const Color(0xFF00E676),
+      lensColor: const Color(0xFF121212),
+      environmentImage: 'assets/environments/green_point.jpg',
+      modelUrl: _sunglassesUrl,
+      materialJs: _colorScript(
+        frame: const Color(0xFF00E676),
+        lens: const Color(0xFF121212),
+        opacity: 0.85,
       ),
     ),
   ];

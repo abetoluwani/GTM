@@ -22,7 +22,7 @@ class PanoramaLayer extends StatelessWidget {
         return child!;
       },
       child: PanoramaViewer(
-        animSpeed: 0.1, // Slow rotation for ambient feel
+        animSpeed: 0.0, // Disabled auto-rotation for stability
         sensorControl: SensorControl.orientation, // Allows looking around by moving the phone
         child: Image.asset(
           environmentImage,
