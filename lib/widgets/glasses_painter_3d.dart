@@ -5,11 +5,7 @@ class GlassesPainter3D extends StatelessWidget {
   final GlassesModel model;
   final double size;
 
-  const GlassesPainter3D({
-    super.key,
-    required this.model,
-    this.size = 300,
-  });
+  const GlassesPainter3D({super.key, required this.model, this.size = 300});
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +23,7 @@ class _GlassesPainter extends CustomPainter {
   final Color frameColor;
   final Color lensColor;
 
-  _GlassesPainter({
-    required this.frameColor,
-    required this.lensColor,
-  });
+  _GlassesPainter({required this.frameColor, required this.lensColor});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -41,11 +34,11 @@ class _GlassesPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     final lensPaint = Paint()
-      ..color = lensColor.withOpacity(0.6)
+      ..color = lensColor.withValues(alpha: 0.6)
       ..style = PaintingStyle.fill;
 
     final highlightPaint = Paint()
-      ..color = Colors.white.withOpacity(0.3)
+      ..color = Colors.white.withValues(alpha: 0.3)
       ..style = PaintingStyle.fill;
 
     final width = size.width;

@@ -26,7 +26,7 @@ class SleekIconButton extends StatelessWidget {
         ),
         child: Icon(
           icon,
-          color: Colors.white.withOpacity(0.8),
+          color: Colors.white.withValues(alpha: 0.8),
           size: 28,
         ),
       ),
